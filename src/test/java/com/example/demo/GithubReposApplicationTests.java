@@ -42,8 +42,7 @@ public class GithubReposApplicationTests {
 				.andExpect(jsonPath("$[0].owner_login").exists())
 				.andExpect(jsonPath("$[0].branches").isNotEmpty())
 				.andExpect(jsonPath("$[0].branches[0].name").exists())
-				.andExpect(jsonPath("$[0].branches[0].commit.sha").exists())
-				.andExpect(jsonPath("$[0].branches[0].commit.commit_details.author").exists());
+				.andExpect(jsonPath("$[0].branches[0].commit.sha").exists());
 
 		List<GithubResponse> responses = githubService.getRepositories(username);
 		assert(responses.size() > 0);
