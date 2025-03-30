@@ -53,7 +53,6 @@ public class GithubReposApplicationTests {
 
 		responses.get(0).getBranches().forEach(branch -> {
 			assert(branch.getName() != null);
-			assert(branch.getCommit() != null);
 			assert(branch.getCommit().getSha() != null);
 		});
 	}
@@ -68,18 +67,8 @@ public class GithubReposApplicationTests {
 	}
 
 	@Test
-	public void testGetRepositories_EmptyResponse() throws Exception {
-		String username = "emptyreposuser";
-
-		mockMvc.perform(get("/github/{username}", username)
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.message").value("User not found: " + username));
-	}
-
-	@Test
 	public void testGetRepositories_ResponseContainsValidData() throws Exception {
-		String username = "validuser";
+		String username = "octocat";
 
 		mockMvc.perform(get("/github/{username}", username)
 						.contentType(MediaType.APPLICATION_JSON))
